@@ -1,0 +1,93 @@
+<!DOCTYPE>
+<html>
+ <head>
+   <title>TWAIN</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ </head>
+ <style type="text/css">
+ 	body{
+ 		background-color: #c3ccd3;
+ 	}
+ 	.wrapp, .del{
+ 		display: inline-block;
+ 	}
+  	.wrapp{
+		margin:15px 25px;
+		position: relative;
+ 	}
+ 	img{
+ 		border: 1px solid #fff;
+ 		box-shadow: 0 0 18px #8ea6b2;
+ 	}
+ 	.close {
+		position: absolute;
+		top: 10px;
+		right: 15px;
+		width: 25px;
+		height: 25px;
+		opacity: 0.4;
+	}
+	.close:hover {
+		opacity: 1;
+	}
+	.close:before, .close:after {
+		position: absolute;
+		left: 15px;
+		content: ' ';
+		height: 26px;
+		width: 3px;
+		background-color: red;
+	}
+	.close:before {
+		transform: rotate(45deg);
+	}
+	.close:after {
+		transform: rotate(-45deg);
+	}
+	.home{
+		position: absolute;
+		z-index: 1;
+		left:10px;
+		top: 24px;
+		width: 50px;
+		height: 50px;
+	}
+	.h2{
+		height: 50px;
+		color: white;
+		font-size: 40px;
+		text-align: center;
+		box-shadow: 0 0 18px #8ea6b2;
+		font-family: 'Marck Script', cursive;
+	}
+ </style>
+
+ <body>
+ 	<div class = 'home'>
+ 		<a href = "/">
+ 			<i class="glyphicon glyphicon-home" style="font-size: 40px; color: #fff"></i>
+ 		</a>
+ 	</div>
+ 	<div class = 'h2'>Галерея</div>
+ 	<% for (let i = 0; i < img.length; i++) { %>
+ 		<div class = "wrapp">
+	 		<a href = "/slider-gallery"><img class = 'show' src = <%= 'public/images/' + img[i] %> width = "280" height ="200" alt="Фотография" /><a>
+	 		<div class = "del"><a href="#" class="close" id = <%= img[i] %>></a></div>
+ 		</div>
+ 	<% } %>
+
+<script>
+	let del = document.querySelectorAll('.close');
+
+	del.forEach(item => item.addEventListener('click', (e) => {
+		let id = e.target.id;
+		fetch(`/delete/${id}`).then( res => {
+			if (res.status == 200) {window.location.reload();}
+		});
+	}));
+
+</script>
+</body>
+ 

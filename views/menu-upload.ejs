@@ -1,0 +1,72 @@
+<!DOCTYPE>
+<html>
+ <head>
+   <title>TWAIN</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+   <link  rel="stylesheet" href = "../public/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+ <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+ <style type="text/css">
+  .home{
+    display: inline-block;
+    width:50px;
+    height: 50px;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+  }
+  .thumb{
+    max-width: 400px;
+    max-height: 400px;
+    border:1px solid #fff;
+  }
+ </style>
+
+ <body>
+ 	<div class ="load-menu">
+    <div class = 'home'>
+      <a href = "/">
+        <i class="glyphicon glyphicon-home" style="font-size: 40px; color: #fff"></i>
+      </a>
+    </div>
+      <form id ="imgForm" action="/upload-main/response" enctype="multipart/form-data" method="post"> 
+          <span class = "load-menu-span">Завантаження фото в галерею</span>
+          <p>
+            <label for = "file-selector"><i class="fa fa-upload" aria-hidden="true"></i>  Обрати файл...</label>
+            <input type="file" name="filedata" multiple accept="image/*,image/jpeg" id="file-selector" class="inputfile">
+            <div><input type="submit" value="Відправити" name = "butSubmit"></div>
+          </p>
+      </form>
+      <div class = "show-img">
+        <span id="output"></span>
+      </div>
+    </div>
+
+
+<script>
+
+  function handleFileSelect(evt) {
+    let file = evt.target.files; 
+    let f = file[0];
+
+    let reader = new FileReader();
+
+    reader.onload = (function(theFile) {
+      return function(e) {
+        let span = document.createElement('span');
+        span.innerHTML = ['<img class="thumb" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
+        document.getElementById('output').insertBefore(span, null);
+      };
+    })(f);
+
+    reader.readAsDataURL(f);
+    document.getElementById('output').textContent ='';
+  }
+
+  document.querySelector('#file-selector').addEventListener('change', handleFileSelect, false);
+</script>
+
+</body>

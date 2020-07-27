@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+ <head>
+   <title>TWAIN</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <link href="https://fonts.googleapis.com/css2?family=Marck+Script&display=swap" rel="stylesheet">
+   <style>
+   	div{
+   		background: url(../public/images/background.jpg);
+   		text-align:center;
+   		line-height:35px;
+    	font-family: 'Marck Script', cursive;
+    	padding-top: 9%;
+    	height:100%;
+   	}
+   	h1{
+   		color:white;
+   	}
+   	button{
+   	    border: 2px solid rgb(253, 253, 253);
+	    border-radius: 40px;
+	    width: 250px;
+	    height: 50px;
+	    background-color: inherit;
+	    color:#fff;
+	    font-size: 20px;
+	    font-family: 'Marck Script', cursive;
+   	}
+   	button:hover{
+   		transition: all 1s ease-out;
+	    background-color: #fff;
+	    color:black
+   	}
+   	a{
+   		text-decoration:none;
+   		color: #000 !important;
+   	}
+   </style>
+ </head>
+
+ <body>
+   <div>
+     <% if (name !== '') { %>
+        <h1> Зображення <%= name %> вдало завантажено! </h1>
+     <% } else { %>
+        <h1>Упс! Щось пішло не так . . .  Спробуйте ще раз</h1>
+     <% } %>
+      <button><a href ="/upload-main">Завантажити ще</a></button>
+      <button><a href ="/gallery">Перейти до галереї</a></button>
+   </div>
+ </body>
